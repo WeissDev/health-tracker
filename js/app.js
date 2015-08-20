@@ -40,7 +40,39 @@ app.FoodView = Backbone.View.extend({
 	template: _.template( $('#search-results-template').html() ),
 
 	render: function() {
-		/** this.el refers to tagName */
+		/** this.el refers to ul#search-results */
+		this.$el.html( this.template(this.model.attributes) );
+
+		return this;
+	}
+});
+
+var app = app || {};
+
+app.SelectedFoodView = Backbone.View.extend({
+
+	tagName: 'ul',
+	className: 'user-select',
+	template: _.template( $('#user-select-template').html() ),
+
+	render: function() {
+		/** this.el refers to ul#user-select */
+		this.$el.html( this.template(this.model.attributes) );
+
+		return this;
+	}
+});
+
+var app = app || {};
+
+app.SelectedFoodView = Backbone.View.extend({
+
+	tagName: 'ul',
+	className: 'user-select',
+	template: _.template( $('#user-select-template').html() ),
+
+	render: function() {
+		/** this.el refers to ul#user-select */
 		this.$el.html( this.template(this.model.attributes) );
 
 		return this;
@@ -53,6 +85,10 @@ var app = app || {};
 app.ListView = Backbone.View.extend({
 
 	el: '#results',
+
+	events: {
+		'click .add': 'addToSelected'
+	},
 
 	initialize: function(results) {
 		this.collection = new app.FoodCollection(results);
@@ -72,6 +108,13 @@ app.ListView = Backbone.View.extend({
 			model: result
 		});
 		this.$el.append( foodView.render().el );
+	},
+
+	addToSelected: function() {
+		console.log('addToSelected()');
+		$('.result-li').each(function(index) {
+			console.log( index + ": " + $( this ).text() );
+		});
 	}
 
 });
