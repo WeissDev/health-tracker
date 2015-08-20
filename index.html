@@ -12,20 +12,27 @@
 				<h1>Health Tracker</h1>
 				<input type="text" id="search-bar">
 			</header>
-			<section id="main">
-				<ul id="search-results">
-					<!-- search results template -->
-					<script type="text/template" id="search-results-template">
-						<div class="view">
-							<input class="toggle" type="checkbox" <%= added ? 'checked' : ''%>>
-							<label><%= name %></label>
-						</div>
-					</script>
+			<section id="results">
+				<ul class="search-results">
+
 				</ul>
 			</section>
-			<footer id="footer"></footer>
+			<section id="user-list">
+				<ul class="user-select">
+
+				</ul>
+			</section>
 		</section>
+		<footer id="footer"></footer>
 	</div>
+
+	<!-- search results template -->
+	<script type="text/template" id="search-results-template">
+
+			<input class="toggle" type="checkbox" <%= added ? 'checked' : ''%>>
+			<label><%= name %></label>
+
+	</script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
