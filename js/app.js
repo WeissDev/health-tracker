@@ -55,12 +55,29 @@ app.SelectedFoodView = Backbone.View.extend({
 	className: 'user-select',
 	template: _.template( $('#user-select-template').html() ),
 
+	events: {
+		'click .add': 'addToSelected'
+	},
+
+	initialize: function(results) {
+		this.collection = new app.FoodCollection(results);
+
+		this.render();
+	},
+
 	render: function() {
 		/** this.el refers to ul#user-select */
 		this.$el.html( this.template(this.model.attributes) );
 
 		return this;
+	},
+
+	addToSelected: function() {
+		console.log('addToSelected()');
+		console.log(this.collection);
+		new app.SelectedFoodView(this.collection);
 	}
+
 });
 
 var app = app || {};
@@ -69,10 +86,6 @@ var app = app || {};
 app.ListView = Backbone.View.extend({
 
 	el: '#results',
-
-	events: {
-		'click .add': 'addToSelected'
-	},
 
 	initialize: function(results) {
 		this.collection = new app.FoodCollection(results);
@@ -93,13 +106,6 @@ app.ListView = Backbone.View.extend({
 			model: result
 		});
 		this.$el.append( foodView.render().el );
-	},
-
-	addToSelected: function() {
-		console.log('addToSelected()');
-		console.log(this.collection);
-		new app.SelectedFoodView(this.collection);
-
 	}
 
 });
