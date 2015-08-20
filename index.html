@@ -28,10 +28,21 @@
 
 	<!-- search results template -->
 	<script type="text/template" id="search-results-template">
-
-			<input class="toggle" type="checkbox" <%= added ? 'checked' : ''%>>
+		<li class="result-li">
 			<label><%= name %></label>
+			<label><%= brand %></label>
+			<label><%= calories %></label>
+			<button class="add">Add</button>
+		</li>
+	</script>
 
+	<!-- user select template -->
+	<script type="text/template" id="user-select-template">
+			<li>
+				<label><%= name %></label>
+				<label><%= brand %></label>
+				<label><%= calories %></label>
+			</li>
 	</script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
