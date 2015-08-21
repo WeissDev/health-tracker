@@ -6,3 +6,7 @@
 li {
 	list-style-type: none;
 }
+
+tr:nth-child(even) {
+    background-color: #999;
+}
