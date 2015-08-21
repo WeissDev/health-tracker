@@ -118,30 +118,32 @@ app.ListView = Backbone.View.extend({
 var app = app || {};
 
 $(function() {
-	var searchResults = [
-		{name: 'Heinz Tomato Ketchup', brand: 'Heinz', calories: 45, checked: false},
-		{name: 'Mountain Dew', brand: 'Mtn Dew', calories: 110, checked: false},
-		{name: 'Whopper', brand: 'Burger King', calories: 500, checked: false}
-	];
 
-new app.ListView(searchResults);
+
+
+	//
 
 	$('#search-btn').on('click', function() {
+		var searchResults = [];
 		$('.search-results').empty();
 		var userInput = $('#search-bar').val();
 		console.log(userInput);
-		var nutritionixUrl = 'https://api.nutritionix.com/v1_1/search/' + userInput + '?results=0:10&fields=item_name,brand_name,item_id,nf_calories&appId=7609e232&appKey=0a249bb0ad1fc18455fde567706ebba7'
+		var nutritionixUrl = 'https://api.nutritionix.com/v1_1/search/' + userInput + '?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=7609e232&appKey=0a249bb0ad1fc18455fde567706ebba7'
 
 		$.getJSON(nutritionixUrl, function(data) {
 			var responseArray = data.hits;
-			console.log(responseArray);
 			for (var i = 0; i < responseArray.length; i++) {
-				responseArray[i].fields.item_name
-				responseArray[i].fields.brand_name
-				responseArray[i].fields.nf_calories
-
+				var searchResult = {};
+				searchResult.name = responseArray[i].fields.item_name;
+				searchResult.brand = responseArray[i].fields.brand_name;
+				searchResult.calories = responseArray[i].fields.nf_calories;
+				searchResult.checked = false;
+				searchResults.push(searchResult);
 			}
+			console.log(searchResults);
+			new app.ListView(searchResults);
 		});
+
 	});
 
 });
