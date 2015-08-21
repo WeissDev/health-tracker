@@ -15,7 +15,7 @@
 			</header>
 			<section id="results">
 				<table class="search-results">
-
+					<tr style="visibility: hidden"></tr>
 				</table>
 			</section>
 			<section id="user-list">
@@ -33,7 +33,7 @@
 				<td><%= name %></td>
 				<td><%= brand %></td>
 				<td><%= calories %></td>
-				<td><input type="checkbox"></td>
+				<td><input type="checkbox" class="checkbox" <%= checked ? 'checked' : ''%>></td>
 
 		</tr>
 	</script>
