@@ -10,7 +10,7 @@ app.FoodModel = Backbone.Model.extend({
 		name: '',
 		brand: '',
 		calories: '',
-		added: false
+		checked: false
 	}
 });
 
@@ -26,6 +26,13 @@ app.FoodCollection = Backbone.Collection.extend({
 
 });
 
+var app = app || {};
+/** Collection for selected food items */
+app.SelectedCollection = Backbone.Collection.extend({
+
+	model: app.FoodModel
+});
+
 /**
  * VIEW
  */
@@ -35,13 +42,12 @@ var app = app || {};
 /** View for search results */
 app.FoodView = Backbone.View.extend({
 
-	tagName: 'ul',
-	className: 'search-results',
+	el: '.search-results',
 	template: _.template( $('#search-results-template').html() ),
 
 	render: function() {
 		/** this.el refers to ul#search-results */
-		this.$el.html( this.template(this.model.attributes) );
+		this.$el.append( this.template(this.model.attributes) );
 
 		return this;
 	}
@@ -50,7 +56,6 @@ app.FoodView = Backbone.View.extend({
 var app = app || {};
 
 app.SelectedFoodView = Backbone.View.extend({
-
 	tagName: 'ul',
 	className: 'user-select',
 	template: _.template( $('#user-select-template').html() ),
@@ -76,7 +81,8 @@ app.ListView = Backbone.View.extend({
 
 	initialize: function(results) {
 		this.collection = new app.FoodCollection(results);
-
+		this.resultsArray = results;
+		console.log(this.resultsArray[0]);
 		this.render();
 	},
 
@@ -95,10 +101,11 @@ app.ListView = Backbone.View.extend({
 		this.$el.append( foodView.render().el );
 	},
 
-	addToSelected: function() {
-		console.log('addToSelected()');
-		console.log(this.collection);
-		new app.SelectedFoodView(this.collection);
+	addToSelected: function(index) {
+		for (var i = 0; i < this.resultsArray.length; i++) {
+			this.resultsArray[i].btnId = i;
+
+		};
 
 	}
 
@@ -112,10 +119,30 @@ var app = app || {};
 
 $(function() {
 	var searchResults = [
-		{name: 'Heinz Tomato Ketchup', brand: 'Heinz', calories: 45, added: false},
-		{name: 'Mountain Dew', brand: 'Mtn Dew', calories: 110, added: false},
-		{name: 'Whopper', brand: 'Burger King', calories: 500, added: false}
+		{name: 'Heinz Tomato Ketchup', brand: 'Heinz', calories: 45, checked: false},
+		{name: 'Mountain Dew', brand: 'Mtn Dew', calories: 110, checked: false},
+		{name: 'Whopper', brand: 'Burger King', calories: 500, checked: false}
 	];
 
-	new app.ListView(searchResults);
+new app.ListView(searchResults);
+
+	$('#search-btn').on('click', function() {
+		$('.search-results').empty();
+		var userInput = $('#search-bar').val();
+		console.log(userInput);
+		var nutritionixUrl = 'https://api.nutritionix.com/v1_1/search/' + userInput + '?results=0:10&fields=item_name,brand_name,item_id,nf_calories&appId=7609e232&appKey=0a249bb0ad1fc18455fde567706ebba7'
+
+		$.getJSON(nutritionixUrl, function(data) {
+			var responseArray = data.hits;
+			console.log(responseArray);
+			for (var i = 0; i < responseArray.length; i++) {
+				responseArray[i].fields.item_name
+				responseArray[i].fields.brand_name
+				responseArray[i].fields.nf_calories
+
+			}
+		});
+	});
+
 });
+
