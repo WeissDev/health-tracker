@@ -10,12 +10,13 @@
 		<section id="health-tracker">
 			<header class="header">
 				<h1>Health Tracker</h1>
-				<input type="text" id="search-bar">
+				<input type="text" id="search-bar" placeholder="Search for foods and drinks..." autofocus>
+				<button id="search-btn">Search</button>
 			</header>
 			<section id="results">
-				<ul class="search-results">
+				<table class="search-results">
 
-				</ul>
+				</table>
 			</section>
 			<section id="user-list">
 				<ul class="user-select">
@@ -28,12 +29,13 @@
 
 	<!-- search results template -->
 	<script type="text/template" id="search-results-template">
-		<li class="result-li">
-			<label class="item-name"><%= name %></label>
-			<label class="item-brand"><%= brand %></label>
-			<label class="calories"><%= calories %></label>
-			<button class="add">Add</button>
-		</li>
+		<tr>
+				<td><%= name %></td>
+				<td><%= brand %></td>
+				<td><%= calories %></td>
+				<td><input type="checkbox"></td>
+
+		</tr>
 	</script>
 
 	<!-- user select template -->
