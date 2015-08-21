@@ -11,7 +11,13 @@ app.FoodModel = Backbone.Model.extend({
 		brand: '',
 		calories: '',
 		checked: false
-	}
+	},
+
+
+    addChecked: function() {
+    	this.set({checked: true});
+    	console.log(this.toJSON());
+    }
 });
 
 /**
@@ -22,7 +28,18 @@ var app = app || {};
 
 app.FoodCollection = Backbone.Collection.extend({
 	/** Reference to this collections model */
-	model: app.FoodModel
+	model: app.FoodModel,
+
+	completed: function() {
+		return this.filter(function(item) {
+			return item.get('checked');
+		});
+	},
+
+	// Filter down the list to only todo items that are still not finished.
+	remaining: function() {
+		return this.without.apply( this, this.checked() );
+	}
 
 });
 
@@ -45,11 +62,19 @@ app.FoodView = Backbone.View.extend({
 	el: '.search-results',
 	template: _.template( $('#search-results-template').html() ),
 
+	events: {
+		'click .check': 'addToSelected'
+	},
+
 	render: function() {
 		/** this.el refers to ul#search-results */
 		this.$el.append( this.template(this.model.attributes) );
 
 		return this;
+	},
+
+	addToSelected: function() {
+		this.model.addChecked();
 	}
 });
 
@@ -63,7 +88,6 @@ app.SelectedFoodView = Backbone.View.extend({
 	render: function() {
 		/** this.el refers to ul#user-select */
 		this.$el.html( this.template(this.model.attributes) );
-
 		return this;
 	}
 });
@@ -75,14 +99,9 @@ app.ListView = Backbone.View.extend({
 
 	el: '#results',
 
-	events: {
-		'click .add': 'addToSelected'
-	},
-
 	initialize: function(results) {
 		this.collection = new app.FoodCollection(results);
-		this.resultsArray = results;
-		console.log(this.resultsArray[0]);
+
 		this.render();
 	},
 
@@ -99,14 +118,6 @@ app.ListView = Backbone.View.extend({
 			model: result
 		});
 		this.$el.append( foodView.render().el );
-	},
-
-	addToSelected: function(index) {
-		for (var i = 0; i < this.resultsArray.length; i++) {
-			this.resultsArray[i].btnId = i;
-
-		};
-
 	}
 
 });
@@ -119,15 +130,11 @@ var app = app || {};
 
 $(function() {
 
-
-
-	//
-
 	$('#search-btn').on('click', function() {
 		var searchResults = [];
 		$('.search-results').empty();
 		var userInput = $('#search-bar').val();
-		console.log(userInput);
+
 		var nutritionixUrl = 'https://api.nutritionix.com/v1_1/search/' + userInput + '?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=7609e232&appKey=0a249bb0ad1fc18455fde567706ebba7'
 
 		$.getJSON(nutritionixUrl, function(data) {
@@ -140,7 +147,7 @@ $(function() {
 				searchResult.checked = false;
 				searchResults.push(searchResult);
 			}
-			console.log(searchResults);
+
 			new app.ListView(searchResults);
 		});
 

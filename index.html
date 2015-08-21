@@ -33,10 +33,12 @@
 				<td><%= name %></td>
 				<td><%= brand %></td>
 				<td><%= calories %></td>
-				<td><input type="checkbox"></td>
+				<td><input type="checkbox" class="check" <%= checked ? 'checked' : ''%> ></td>
 
 		</tr>
 	</script>
+
+
 
 	<!-- user select template -->
 	<script type="text/template" id="user-select-template">
@@ -51,6 +53,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.2/backbone-min.js"></script>
 	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+
 	<script src="js/app.js"></script>
 </body>
 </html>
