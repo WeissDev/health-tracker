@@ -6,6 +6,9 @@ var app = app || {};
 
 $(function() {
 
+	new app.AppView()
+
+/*
 	$('#search-btn').on('click', function() {
 		var searchResults = [];
 		$('.search-results').empty();
@@ -25,6 +28,6 @@ $(function() {
 			new app.AppView(searchResults);
 		});
 
-	});
+	});*/
 
 });

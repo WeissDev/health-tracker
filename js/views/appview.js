@@ -7,35 +7,103 @@ app.AppView = Backbone.View.extend({
 
 	template: _.template($('#stats-template').html()),
 
-	initialize: function(results) {
-		this.collection = new FoodCollection(results);
-		console.log(this.collection.toJSON());
-
-		this.listenTo(FoodCollection, 'add', this.addOne);
-		//this.listenTo(FoodCollection, 'reset', this.addAll);
-		this.listenTo(FoodCollection, 'all', this.render);
-		this.render();
+	events: {
+		'click #search-btn': 'getJson'
 	},
 
-	/** Render list by looping through all results */
+	/**
+	 * Setup event listeners for the collections on initialize
+	 * Updates each view when models are added to each collection
+	 * respectively.
+	 */
+	initialize: function() {
+		this.listenTo(app.FoodCollection, 'add', this.addResponse);
+		this.listenTo(app.SelectedCollection, 'add', this.addOne);
+		this.listenTo(app.SelectedCollection, 'reset', this.addAll);
+		this.listenTo(app.SelectedCollection, 'all', this.render);
+
+		app.FoodCollection.fetch();
+		app.SelectedCollection.fetch();
+	},
+
 	render: function() {
-		this.collection.each(function(result) {
-			this.renderItem(result);
-		}, this);
-	},
-
-	/** Render an item by creating a FoodView for it */
-	renderItem: function(result) {
-		var foodView = new app.FoodView({
-			model: result
+		var remaining = app.SelectedCollection.length;
+		var totalCalories = 0;
+		app.SelectedCollection.forEach(function(item) {
+			totalCalories += item.get('calories');
 		});
-		this.$el.append( foodView.render().el );
+
+		if (app.SelectedCollection.length) {
+			$('#footer').show();
+			$('#footer').html(this.template({
+				remaining: remaining,
+				totalCalories: totalCalories
+			}));
+		} else {
+			$('#footer').hide();
+		}
 	},
 
+	/**
+	 * Receives an item selected by the user an appends it
+	 * to the selected food view.
+	 */
 	addOne: function(item) {
-		console.log(item);
-		var view = new app.SelectedFoodView({ model: item});
-		$('.user-select').append( view.render().el);
+		var selected = new app.SelectedFoodView({
+			model: item
+		});
+		$('#user-select').append( selected.render().el );
+	},
+
+	/**
+	 * Renders all items in SelectedCollection which are stored in localStorage
+	 */
+	addAll: function() {
+		this.$('#user-select').html('');
+		app.SelectedCollection.each(this.addOne, this);
+	},
+
+	addResponse: function(item) {
+		var received = new app.ResultsView({
+			model: item
+		});
+		$('#search-results').append( received.render().el );
+	},
+
+	/** AJAX GET Request */
+	getJson: function() {
+		var searchTerm = $('#search-bar').val()
+		var nutrionixUrl = 'https://api.nutritionix.com/v1_1/search/' + searchTerm + '?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=7609e232&appKey=0a249bb0ad1fc18455fde567706ebba7'
+		$.ajax({
+			method: 'GET',
+			url: nutrionixUrl,
+			dataType: 'json',
+			success: function(data) {
+				var responseArray = data.hits;
+				console.log(responseArray);
+				for (var i = 0; i < responseArray.length; i++) {
+					var resultItem = new app.FoodModel({
+						name: responseArray[i].fields.item_name,
+						brand: responseArray[i].fields.brand_name,
+						calories: responseArray[i].nf_calories,
+						index: i
+					});
+					console.log(responseArray[i].fields.nf_calories);
+					app.FoodCollection.create(resultItem);
+				} // end for loop
+
+			},
+			error: function() {
+
+			}
+		});
 	}
 
 });
+
+new app.FoodModel({
+	name: 'gug',
+	brand: 'gug',
+	calories: 10,
+	index: 1
+})

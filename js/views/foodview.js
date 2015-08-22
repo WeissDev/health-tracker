@@ -1,7 +1,7 @@
 var app = app || {};
 
 /** View for search results */
-app.FoodView = Backbone.View.extend({
+app.ResultsView = Backbone.View.extend({
 
 	tagName: 'li',
 	template: _.template( $('#search-results-template').html() ),
@@ -18,7 +18,7 @@ app.FoodView = Backbone.View.extend({
 
 	render: function() {
 		/** this.el refers to table.search-results */
-		this.$el.append( this.template(this.model.attributes) );
+		this.$el.html( this.template(this.model.attributes) );
 
 
 		return this;
