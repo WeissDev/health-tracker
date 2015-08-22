@@ -10,20 +10,11 @@ body {
 
 }
 
-
-section#health-tracker {
-
-}
-
 .header {
 	background-color: #b4e175;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	text-align: center;
-}
-
-h1 {
-
 }
 
 input#search-bar {
@@ -73,6 +64,22 @@ tr:nth-child(even) {
 
 tr:nth-child(odd) {
 	background: #c1e678;
+}
+
+a {
+	color: #193439;
+}
+
+a:hover {
+	color: #b12d2d;
+	text-decoration: none;
+}
+
+footer {
+	margin: 20px 0;
+	background-color: #7ca62a;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
 }
 
 

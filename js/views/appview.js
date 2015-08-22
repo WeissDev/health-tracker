@@ -35,13 +35,13 @@ app.AppView = Backbone.View.extend({
 		});
 
 		if (app.SelectedCollection.length) {
-			$('#footer').show();
-			$('#footer').html(this.template({
+			$('#stats').show();
+			$('#stats').html(this.template({
 				remaining: remaining,
 				totalCalories: totalCalories
 			}));
 		} else {
-			$('#footer').hide();
+			$('#stats').hide();
 		}
 	},
 
