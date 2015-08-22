@@ -6,7 +6,7 @@ var app = app || {};
 
 app.SelectedFoodView = Backbone.View.extend({
 
-	tagName: 'li',
+	tagName: 'tr',
 	template: _.template( $('#user-select-template').html() ),
 
 	events: {

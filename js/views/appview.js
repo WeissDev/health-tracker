@@ -8,7 +8,8 @@ app.AppView = Backbone.View.extend({
 	template: _.template($('#stats-template').html()),
 
 	events: {
-		'click #search-btn': 'getJson'
+		'click #search-btn': 'getJson',
+		'click #clear-btn': 'clearResults'
 	},
 
 	/**
@@ -72,6 +73,7 @@ app.AppView = Backbone.View.extend({
 
 	/** AJAX GET Request */
 	getJson: function() {
+		$('#search-results').empty();
 		var searchTerm = $('#search-bar').val()
 		var nutrionixUrl = 'https://api.nutritionix.com/v1_1/search/' + searchTerm + '?results=0:20&fields=item_name,brand_name,item_id,nf_calories&appId=7609e232&appKey=0a249bb0ad1fc18455fde567706ebba7'
 		$.ajax({
@@ -94,16 +96,15 @@ app.AppView = Backbone.View.extend({
 
 			},
 			error: function() {
-
+				$('#search-results').append('<p>Couldn\'t get Nutritionix data. Check your internet connection or try again later.</p>');
 			}
 		});
+	},
+
+	clearResults: function() {
+		_.invoke(app.FoodCollection.toArray(), 'destroy');
+		this.$('#search-bar').val('');
+		return false;
 	}
 
 });
-
-new app.FoodModel({
-	name: 'gug',
-	brand: 'gug',
-	calories: 10,
-	index: 1
-})

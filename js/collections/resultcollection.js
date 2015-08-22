@@ -7,6 +7,7 @@ var FoodCollection = Backbone.Collection.extend({
 
 	localStorage: new Backbone.LocalStorage('results-backbone')
 
+
 });
 
 app.FoodCollection = new FoodCollection();

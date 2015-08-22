@@ -3,7 +3,7 @@ var app = app || {};
 /** View for search results */
 app.ResultsView = Backbone.View.extend({
 
-	tagName: 'li',
+	tagName: 'tr',
 	template: _.template( $('#search-results-template').html() ),
 
 	events: {
