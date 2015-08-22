@@ -1,17 +1,100 @@
+
+
 body {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Droid Sans', sans-serif;
+	color: #193439;
+	background-color: #d1f1a5;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	font-smoothing: antialiased;
 
 }
 
-.container {
-	margin: 0 auto;
+
+section#health-tracker {
+
 }
 
-#search-bar {
-	width: 40em;
-	height: 2em;
+.header {
+	background-color: #b4e175;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	text-align: center;
 }
+
+h1 {
+
+}
+
+input#search-bar {
+	width: 100%;
+	height: 2.2em;
+	color: #777;
+	font-size: 1.1em;
+}
+
+.bottom-spacing {
+	margin-bottom: 10px;
+}
+
+td {
+	padding: 10px 0;
+}
+
 
 #search-btn {
-	height: 2.5em;
+	background-color: #248e24;
+	color: #f5f5f5;
 }
+
+
+.destroy {
+	background-color: #d14e4e;
+	color: #fff;
+}
+
+.fullspan {
+	position: relative;
+	width: 100%;
+}
+
+table#search-results {
+	position: relative;
+	width: 100%;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+tr:nth-child(even) {
+	background: #9ac349;
+}
+
+tr:nth-child(odd) {
+	background: #c1e678;
+}
+
+
+@media only screen and (min-width: 500px) {
+
+
+	#search-ui {
+		margin: auto;
+	}
+
+	input#search-bar {
+		width: 50%;
+	}
+}
+
+@media only screen and (min-width: 650px) {
+
+	input#search-bar {
+		width: 330px;
+	}
+
+}
+
+
+

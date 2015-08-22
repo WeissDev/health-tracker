@@ -2,58 +2,65 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1">
 	<title>Health Tracker</title>
-	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 	<div class="container">
-		<section id="health-tracker">
+		<section id="health-tracker" class="row">
 			<header class="header">
-				<h1>Health Tracker</h1>
-				<input type="text" id="search-bar" placeholder="Search for foods and drinks..." autofocus>
-				<button id="search-btn">Search</button>
+				<h1 class="text-center">Health Tracker App</h1>
+				<section id="search-ui">
+					<input type="text" id="search-bar" class="bottom-spacing" placeholder="Search for foods and drinks..." autofocus>
+					<button id="search-btn" class="btn bottom-spacing">Search</button>
+					<button id="clear-btn" class="btn bottom-spacing">Clear Results</button>
+				</section>
 			</header>
-			<section id="results">
-				<ul id="search-results">
+			<section id="results" class="col-md-6">
+				<h2 class="text-center">Search Results</h2>
+				<table id="search-results" class="table-responsive fullspan">
 
-				</ul>
+				</table>
 			</section>
-			<section id="user-list">
-				<h2>Selected</h2>
-				<ul id="user-select">
+			<section id="user-list" class="col-md-6">
+				<h2 class="text-center">Selected</h2>
+				<table id="user-select" class="table-responsive fullspan">
 
-				</ul>
+				</table>
+				<section id="stats" class="text-center"></section>
 			</section>
 		</section>
-		<footer id="footer"></footer>
+
 	</div>
 
 	<!-- search results template -->
 	<script type="text/template" id="search-results-template">
 
-			<label><%= name %></label>
-			<label><%= brand %></label>
-			<label><%= calories %></label>
-			<button class="add">Add</button>
+			<td><%= name %></td>
+			<td><%= brand %></td>
+			<td><%= calories %> kcal</td>
+			<td><button class="add btn">Add</button></td>
 
 	</script>
 
 	<!-- user select template -->
 	<script type="text/template" id="user-select-template">
 
-			<label><%= name %></label>
-			<label><%= brand %></label>
-			<label><%= calories %></label>
-			<button class="destroy">Remove</button>
+			<td><%= name %></td>
+			<td><%= brand %></td>
+			<td><%= calories %> kcal</td>
+			<td><button class="destroy btn">Remove</button></td>
 
 	</script>
 
 
 	<!-- food stats template -->
 	<script type="text/template" id="stats-template">
-		<span id="item-count"><strong> <%= remaining %> </strong> <%= remaining === 1 ? 'food item' : 'food items' %> on the list</span>
-		<span class="selected">Total Calories: <%= totalCalories %></span>
+		<p id="item-count"><strong> <%= remaining %> </strong> <%= remaining === 1 ? 'food item' : 'food items' %> on the list</p>
+		<p class="selected">Total Calories: <%= totalCalories %> kcal</p>
 	</script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
