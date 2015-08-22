@@ -85,7 +85,7 @@ app.AppView = Backbone.View.extend({
 					var resultItem = new app.FoodModel({
 						name: responseArray[i].fields.item_name,
 						brand: responseArray[i].fields.brand_name,
-						calories: responseArray[i].nf_calories,
+						calories: responseArray[i].fields.nf_calories,
 						index: i
 					});
 					console.log(responseArray[i].fields.nf_calories);
