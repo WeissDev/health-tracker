@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Health Tracker</title>
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -14,12 +15,13 @@
 				<button id="search-btn">Search</button>
 			</header>
 			<section id="results">
-				<table class="search-results">
+				<ul id="search-results">
 
-				</table>
+				</ul>
 			</section>
 			<section id="user-list">
-				<ul class="user-select">
+				<h2>Selected</h2>
+				<ul id="user-select">
 
 				</ul>
 			</section>
@@ -29,31 +31,42 @@
 
 	<!-- search results template -->
 	<script type="text/template" id="search-results-template">
-		<tr>
-				<td><%= name %></td>
-				<td><%= brand %></td>
-				<td><%= calories %></td>
-				<td><input type="checkbox" class="check" <%= checked ? 'checked' : ''%> ></td>
 
-		</tr>
+			<label><%= name %></label>
+			<label><%= brand %></label>
+			<label><%= calories %></label>
+			<button class="add">Add</button>
+
 	</script>
-
-
 
 	<!-- user select template -->
 	<script type="text/template" id="user-select-template">
-			<li class="select-li">
-				<label><%= name %></label>
-				<label><%= brand %></label>
-				<label><%= calories %></label>
-			</li>
+
+			<label><%= name %></label>
+			<label><%= brand %></label>
+			<label><%= calories %></label>
+			<button class="destroy">Remove</button>
+
+	</script>
+
+
+	<!-- food stats template -->
+	<script type="text/template" id="stats-template">
+		<span id="item-count"><strong> <%= remaining %> </strong> <%= remaining === 1 ? 'food item' : 'food items' %> on the list</span>
+		<span class="selected">Total Calories: <%= totalCalories %></span>
 	</script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.2/backbone-min.js"></script>
-	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.16/backbone.localStorage-min.js"></script>
 
+	<script src="js/models/model.js"></script>
+	<script src="js/collections/selectedcollection.js"></script>
+	<script src="js/collections/resultcollection.js"></script>
+	<script src="js/views/selectedfoodview.js"></script>
+	<script src="js/views/foodview.js"></script>
+	<script src="js/views/appview.js"></script>
 	<script src="js/app.js"></script>
 </body>
 </html>

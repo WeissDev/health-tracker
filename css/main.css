@@ -1,12 +1,17 @@
+body {
+	font-family: 'Montserrat', sans-serif;
+
+}
 
 .container {
 	margin: 0 auto;
 }
 
-li {
-	list-style-type: none;
+#search-bar {
+	width: 40em;
+	height: 2em;
 }
 
-tr:nth-child(even) {
-    background-color: #999;
+#search-btn {
+	height: 2.5em;
 }
