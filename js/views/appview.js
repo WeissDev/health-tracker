@@ -27,6 +27,12 @@ app.AppView = Backbone.View.extend({
 		app.SelectedCollection.fetch();
 	},
 
+	/**
+	 * Calculates the total amount of calories in the selected collection
+	 * and appends it to the page
+	 * Invokes the intakeCanvas function which renders the charts based
+	 * on total calories
+	 */
 	render: function() {
 		var remaining = app.SelectedCollection.length;
 		var totalCalories = 0;
@@ -43,6 +49,7 @@ app.AppView = Backbone.View.extend({
 		} else {
 			$('#stats').hide();
 		}
+		this.intakeCanvas(totalCalories);
 	},
 
 	/**
@@ -82,7 +89,6 @@ app.AppView = Backbone.View.extend({
 			dataType: 'json',
 			success: function(data) {
 				var responseArray = data.hits;
-				console.log(responseArray);
 				for (var i = 0; i < responseArray.length; i++) {
 					var resultItem = new app.FoodModel({
 						name: responseArray[i].fields.item_name,
@@ -90,7 +96,6 @@ app.AppView = Backbone.View.extend({
 						calories: responseArray[i].fields.nf_calories,
 						index: i
 					});
-					console.log(responseArray[i].fields.nf_calories);
 					app.FoodCollection.create(resultItem);
 				} // end for loop
 
@@ -105,6 +110,102 @@ app.AppView = Backbone.View.extend({
 		_.invoke(app.FoodCollection.toArray(), 'destroy');
 		this.$('#search-bar').val('');
 		return false;
+	},
+
+	intakeCanvas: function(total) {
+
+	    var barDataWeek = {
+	        labels : ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],
+	        datasets : [
+	            {
+	                fillColor : "#48A497",
+	                strokeColor : "#48A4D1",
+	                data : [0,0,0,0,0,0,0]
+	            }
+
+	        ]
+	    }
+
+	    switch (new Date().getDay()) {
+	        case 0:
+	            barDataWeek.datasets[0].data[6] = total;
+	            break;
+	        case 1:
+	            barDataWeek.datasets[0].data[0] = total;
+	            break;
+	        case 2:
+	            barDataWeek.datasets[0].data[1] = total;
+	            break;
+	        case 3:
+	            barDataWeek.datasets[0].data[2] = total;
+	            break;
+	        case 4:
+	            barDataWeek.datasets[0].data[3] = total;
+	            break;
+	        case 5:
+	            barDataWeek.datasets[0].data[4] = total;
+	            break;
+	        case 6:
+	            barDataWeek.datasets[0].data[5] = total;
+	            break;
+	    }
+
+	    var intakeWeekly = document.getElementById('bar-chart-weekly').getContext('2d');
+	    new Chart(intakeWeekly).Bar(barDataWeek);
+
+
+	    var barDataMonth = {
+	        labels : ['January','February','March','April','May','June','July','August','September','October','November','December'],
+	        datasets : [
+	            {
+	                fillColor : "#48A497",
+	                strokeColor : "#48A4D1",
+	                data : [0,0,0,0,0,0,0,0,0,0,0,0]
+	            }
+	        ]
+	    }
+
+	    switch (new Date().getMonth()) {
+	        case 0:
+	            barDataMonth.datasets[0].data[0] = total;
+	            break;
+	        case 1:
+	            barDataMonth.datasets[0].data[1] = total;
+	            break;
+	        case 2:
+	            barDataMonth.datasets[0].data[2] = total;
+	            break;
+	        case 3:
+	            barDataMonth.datasets[0].data[3] = total;
+	            break;
+	        case 4:
+	            barDataMonth.datasets[0].data[4] = total;
+	            break;
+	        case 5:
+	            barDataMonth.datasets[0].data[5] = total;
+	            break;
+	        case 6:
+	            barDataMonth.datasets[0].data[6] = total;
+	            break;
+	        case 7:
+	            barDataMonth.datasets[0].data[7] = total;
+	            break;
+	        case 8:
+	            barDataMonth.datasets[0].data[8] = total;
+	            break;
+	        case 9:
+	            barDataMonth.datasets[0].data[9] = total;
+	            break;
+	        case 10:
+	            barDataMonth.datasets[0].data[10] = total;
+	            break;
+	        case 11:
+	            barDataMonth.datasets[0].data[11] = total;
+	            break;
+	    }
+
+	    var intakeMonthly = document.getElementById('bar-chart-monthly').getContext('2d');
+	    new Chart(intakeMonthly).Bar(barDataMonth);
 	}
 
 });

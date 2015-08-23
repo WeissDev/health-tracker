@@ -20,24 +20,34 @@
 				</section>
 			</header>
 			<section id="results" class="col-md-6">
-				<h2 class="text-center">Search Results</h2>
+				<h3 class="text-center">Search Results</h3>
 				<table id="search-results" class="table-responsive fullspan">
 
 				</table>
 			</section>
 			<section id="user-list" class="col-md-6">
-				<h2 class="text-center">Selected</h2>
+				<h3 class="text-center">Selected</h3>
 				<table id="user-select" class="table-responsive fullspan">
 
 				</table>
 				<section id="stats" class="text-center"></section>
+				<section id="chart" class="text-center">
+					<h3>Your Calorie Intake</h3>
+						<h4>This Week</h4>
+						<canvas id="bar-chart-weekly" width="320" height="320"></canvas>
+						<h4>This Month</h4>
+						<canvas id="bar-chart-monthly" width="320" height="320"></canvas>
+				</section>
 			</section>
-
-			<footer id="footer">
-				<p class="text-center">Health Tracker Nutritionix API Search Application</p>
-				<p class="text-center">Written by <a href="https://github.com/WeissDev">Valentin Weiss</a></p>
-			</footer>
 		</section>
+
+
+		<footer id="footer">
+			<p class="text-center">Health Tracker Nutritionix API Search Application</p>
+			<p class="text-center">Written by <a href="https://github.com/WeissDev">Valentin Weiss</a></p>
+		</footer>
+
+
 	</div>
 
 	<!-- search results template -->
@@ -71,6 +81,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.2/backbone-min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.16/backbone.localStorage-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 
 	<script src="js/models/model.js"></script>
 	<script src="js/collections/selectedcollection.js"></script>
@@ -79,5 +90,6 @@
 	<script src="js/views/foodview.js"></script>
 	<script src="js/views/appview.js"></script>
 	<script src="js/app.js"></script>
+
 </body>
 </html>
