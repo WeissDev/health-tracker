@@ -24,7 +24,7 @@ gulp.task('scripts', function() {
   return gulp.src([
     'js/models/model.js',
     'js/collections/selectedcollection.js',
-    'js/collection/resultcollection.js',
+    'js/collections/resultcollection.js',
     'js/views/selectedfoodview.js',
     'js/views/foodview.js',
     'js/views/appview.js',
