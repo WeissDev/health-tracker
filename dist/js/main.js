@@ -1,3 +1,113 @@
+/**
+ * MODEL
+ */
+
+var app = app || {};
+
+app.FoodModel = Backbone.Model.extend({
+	/**
+	 * The default attributes for one food item
+	 * name: Food Item Name
+	 * brand: Brand of Food Item
+	 * calories: Calories of item
+	 * index: Each item gets an index
+	 */
+	defaults: {
+		name: '',
+		brand: '',
+		calories: 0,
+		index: 1
+	}
+});
+/**
+ * COLLECTION
+ */
+
+var app = app || {};
+/** Collection for items selected by user */
+var SelectedCollection = Backbone.Collection.extend({
+
+	/** Reference to this Collections Model*/
+	model: app.FoodModel,
+
+	/** Save collection to localStorage under 'selected-backbone' */
+	localStorage: new Backbone.LocalStorage('selected-backbone')
+});
+
+app.SelectedCollection = new SelectedCollection();
+/**
+ * VIEW
+ */
+
+var app = app || {};
+
+app.SelectedFoodView = Backbone.View.extend({
+
+	/** Create new Table Row for each selected food */
+	tagName: 'tr',
+	template: _.template( $('#user-select-template').html() ),
+
+	events: {
+		'click .destroy': 'removeItem'
+	},
+
+	/** Listens to changes to its model */
+	initialize: function() {
+		this.listenTo(this.model, 'change', this.render);
+		this.listenTo(this.model, 'destroy', this.remove);
+	},
+
+	/** Re-renders the View every time user adds food */
+	render: function() {
+		this.$el.html(this.template(this.model.attributes));
+		return this;
+	},
+
+	/** When user clicks remove button the selected model will be destroyed */
+	removeItem: function() {
+		this.model.destroy();
+	}
+
+});
+var app = app || {};
+
+/** View for search results */
+app.ResultsView = Backbone.View.extend({
+
+	/** Creates new table row for every item */
+	tagName: 'tr',
+	template: _.template( $('#search-results-template').html() ),
+
+	events: {
+		'click .add': 'addToSelected'
+	},
+
+	/** Listens to changes to its model */
+	initialize : function() {
+		this.listenTo(this.model, 'change', this.render);
+		this.listenTo(this.model, 'destroy', this.remove);
+	},
+
+
+	render: function() {
+		this.$el.html( this.template(this.model.attributes) );
+		return this;
+	},
+
+	/**
+	 * When user clicks on .add button the a new FoodModel will be instantiated
+	 * and appended to the SelectedCollection
+	 */
+	addToSelected: function() {
+		var newItem = new app.FoodModel({
+			name: this.model.get('name'),
+			brand: this.model.get('brand'),
+			calories: this.model.get('calories'),
+			index: app.FoodModel.length
+		});
+		app.SelectedCollection.create(newItem);
+	}
+});
 var app = app || {};
 
 /** View for users list of food items */
@@ -222,5 +332,16 @@ app.AppView = Backbone.View.extend({
 	    var intakeMonthly = document.getElementById('bar-chart-monthly').getContext('2d');
 	    new Chart(intakeMonthly).Bar(barDataMonth);
 	}
+
+});
+/**
+ * MAIN APP
+ */
+
+var app = app || {};
+
+$(function() {
+	/** Start the APP! */
+	new app.AppView()
 
 });
