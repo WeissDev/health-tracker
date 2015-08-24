@@ -4,7 +4,6 @@
 
 This health tracker is a single page web app. You can search for any foods or drinks a it will return search results with items and their calories.
 
-<<<<<<< HEAD
 You can then add an items to a collection which automatically adds up all calories. Your total calories will be stored locally in your browser and will appear in 2 charts. One for daily intake, and one for monthly calorie intake.
 
 
@@ -17,12 +16,16 @@ This app is built using on <a href="http://backbonejs.org">Backbonejs</a>, an or
 Further dependencies include:
 
 
-+<a href="http://api.jquery.com/">JQuery</a>
-+<a href="http://www.chartjs.org/">ChartJS</a>
++ <a href="http://api.jquery.com/">JQuery</a>
++ <a href="http://www.chartjs.org/">ChartJS</a>
 
 ## Resources used
 
-+<a href="http://backbonejs.org">Backbonejs Documentation</a>
-+<a href="http://tutorialzine.com/2013/04/services-chooser-backbone-js/">Building a simple backbone app</a> by tutorialzine.com
-+<a href="http://arturadib.com/hello-backbonejs/">Hello Backbone</a>
-+<a href="http://addyosmani.github.io/backbone-fundamentals/">Developing Backbone.js Applications</a>, By Addy Osmani
++ <a href="http://backbonejs.org">Backbonejs Documentation</a>
++ <a href="http://tutorialzine.com/2013/04/services-chooser-backbone-js/">Building a simple backbone app</a> by tutorialzine.com
++ <a href="http://arturadib.com/hello-backbonejs/">Hello Backbone</a>
++ <a href="http://addyosmani.github.io/backbone-fundamentals/">Developing Backbone.js Applications</a>, By Addy Osmani
+=======
+You can then add an items to a collection which automatically adds up all calories.
+The data is retrieved from the <a href="https://developer.nutritionix.com/docs/v1_1">nutritionix API</a>.
+>>>>>>> parent of 98e6701... update readme
