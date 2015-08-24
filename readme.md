@@ -10,6 +10,8 @@ You can then add an items to a collection which automatically adds up all calori
 You can then add an items to a collection which automatically adds up all calories.
 The data is retrieved from the <a href="https://developer.nutritionix.com/docs/v1_1">Nutritionix API</a>.
 
+To use the app you can clone this repository's files or simply follow this<a href="weissdev.github.io/health-tracker">link</a>.
+
 ## Components
 
 This app is built using on <a href="http://backbonejs.org">Backbonejs</a>, an organizational library.
