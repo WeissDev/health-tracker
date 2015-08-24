@@ -9,7 +9,6 @@ You can then add an items to a collection which automatically adds up all calori
 
 
 You can then add an items to a collection which automatically adds up all calories.
->>>>>>> gh-pages
 The data is retrieved from the <a href="https://developer.nutritionix.com/docs/v1_1">Nutritionix API</a>.
 
 ## Components
