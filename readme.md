@@ -25,7 +25,4 @@ Further dependencies include:
 + <a href="http://tutorialzine.com/2013/04/services-chooser-backbone-js/">Building a simple backbone app</a> by tutorialzine.com
 + <a href="http://arturadib.com/hello-backbonejs/">Hello Backbone</a>
 + <a href="http://addyosmani.github.io/backbone-fundamentals/">Developing Backbone.js Applications</a>, By Addy Osmani
-=======
-You can then add an items to a collection which automatically adds up all calories.
-The data is retrieved from the <a href="https://developer.nutritionix.com/docs/v1_1">nutritionix API</a>.
->>>>>>> parent of 98e6701... update readme
+
