@@ -2,7 +2,7 @@
 
 ## Features
 
-This health tracker is a single page web app. You can search for any foods or drinks a it will return search results with items and their calories.
+This health tracker is a single page web app. You can search for any foods or drinks and it will return search results with food items and their calories.
 
 You can then add an items to a collection which automatically adds up all calories. Your total calories will be stored locally in your browser and will appear in 2 charts. One for daily intake, and one for monthly calorie intake.
 
@@ -19,6 +19,7 @@ Further dependencies include:
 
 
 + <a href="http://api.jquery.com/">JQuery</a>
++ <a href="http://underscorejs.org/">Underscorejs</a>
 + <a href="http://www.chartjs.org/">ChartJS</a>
 
 ## Resources used
